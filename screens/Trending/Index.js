@@ -2,6 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {ScrollView, RefreshControl, Text} from 'react-native';
 import List from '../../components/List/Index.js';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+import MMKVStorage from "react-native-mmkv-storage";
+
+const MMKV = new MMKVStorage.Loader().initialize();
 
 const Trending = () => {
   const size = [...Array(20).keys()];
@@ -19,6 +22,8 @@ const Trending = () => {
 
   useEffect(() => {
     fetchRepositories();
+    let array = MMKV.getArray("starred");
+    console.log(array);
   }, []);
 
   if (loading) {
