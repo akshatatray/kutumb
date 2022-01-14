@@ -1,14 +1,46 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, {useEffect, useState} from 'react';
+import {ScrollView, RefreshControl, Text} from 'react-native';
 
 const Trending = () => {
+  const size = [...Array(20).keys()];
+  const [repositories, setRepositories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchRepositories = async () => {
+    const response = await fetch(
+      'https://gh-trending-api.herokuapp.com/repositories?language=',
+    );
+    const data = await response.json();
+    setRepositories(data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchRepositories();
+  }, []);
+
+  if (loading) {
     return (
-        <View>
-            <Text></Text>
-        </View>
-    )
-}
+      <ScrollView>
+        <Text>Loading...</Text>
+      </ScrollView>
+    );
+  }
 
-export default Trending
+  return (
+    <ScrollView
+      refreshControl={
+        <RefreshControl
+          refreshing={loading}
+          onRefresh={() => {
+            setLoading(true);
+            fetchRepositories();
+          }}
+        />
+      }>
+      {/* <List repositories={repositories} /> */}
+    </ScrollView>
+  );
+};
 
-const styles = StyleSheet.create({})
+export default Trending;
