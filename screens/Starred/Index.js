@@ -46,7 +46,7 @@ const Starred = ({ navigation }) => {
           You have no starred repositories.
         </Text>
         <Text style={{textTransform: 'capitalize', fontSize: 16, color: 'black'}}>
-          Pull Down to refresh!
+          Start browsing and star some!
         </Text>
       </ScrollView>
     );
