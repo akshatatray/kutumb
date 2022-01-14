@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, RefreshControl, Text} from 'react-native';
+import List from "../../components/List/Index.js";
 
 const Trending = () => {
   const size = [...Array(20).keys()];
@@ -38,7 +39,7 @@ const Trending = () => {
           }}
         />
       }>
-      {/* <List repositories={repositories} /> */}
+      <List repositories={repositories} />
     </ScrollView>
   );
 };
