@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, RefreshControl, Text} from 'react-native';
-import List from "../../components/List/Index.js";
+import List from '../../components/List/Index.js';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 
 const Trending = () => {
   const size = [...Array(20).keys()];
@@ -23,7 +24,31 @@ const Trending = () => {
   if (loading) {
     return (
       <ScrollView>
-        <Text>Loading...</Text>
+        {size.map(i => (
+          <SkeletonPlaceholder key={i}>
+            <SkeletonPlaceholder.Item flexDirection="row" padding={20}>
+              <SkeletonPlaceholder.Item
+                width={40}
+                height={40}
+                borderRadius={20}
+              />
+              <SkeletonPlaceholder.Item marginLeft={20}>
+                <SkeletonPlaceholder.Item
+                  width={100}
+                  height={14}
+                  borderRadius={4}
+                  marginBottom={5}
+                />
+                <SkeletonPlaceholder.Item
+                  marginTop={6}
+                  width={200}
+                  height={16}
+                  borderRadius={4}
+                />
+              </SkeletonPlaceholder.Item>
+            </SkeletonPlaceholder.Item>
+          </SkeletonPlaceholder>
+        ))}
       </ScrollView>
     );
   }
