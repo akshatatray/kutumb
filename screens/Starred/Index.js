@@ -6,7 +6,7 @@ import MMKVStorage from 'react-native-mmkv-storage';
 
 const MMKV = new MMKVStorage.Loader().initialize();
 
-const Starred = () => {
+const Starred = ({ navigation }) => {
   const size = [...Array(20).keys()];
   const [starred, setStarred] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
@@ -24,8 +24,12 @@ const Starred = () => {
   };
 
   useEffect(() => {
-    getStarred();
-  }, [isLoading, isEmpty]);
+    const unsubscribe = navigation.addListener('focus', () => {
+      getStarred();
+      console.log('Starred');
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   if (isEmpty) {
     return (

@@ -1,15 +1,17 @@
-import React from "react";
-import {NavigationContainer} from "@react-navigation/native";
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import Icon from "react-native-vector-icons/Ionicons";
-import Trending from "./screens/Trending/Index";
-import Starred from "./screens/Starred/Index";
+import React from 'react';
+import {StatusBar} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Trending from './screens/Trending/Index';
+import Starred from './screens/Starred/Index';
 
 const Tab = createBottomTabNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
+      <StatusBar barStyle="dark-content" backgroundColor="white" />
       <Tab.Navigator
         screenOptions={{
           tabBarStyle: {
@@ -22,24 +24,28 @@ const App = () => {
             marginTop: -4,
             marginBottom: 8,
           },
-        }}
-      >
-        <Tab.Screen 
-          name="Trending" 
-          component={Trending} 
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 20,
+            fontWeight: 'bold',
+          },
+        }}>
+        <Tab.Screen
+          name="Trending"
+          component={Trending}
           options={{
             tabBarIcon: ({color, size}) => (
               <Icon name="ios-trending-up" color={color} size={size} />
-            )
+            ),
           }}
         />
-        <Tab.Screen 
-          name="Starred" 
-          component={Starred} 
+        <Tab.Screen
+          name="Starred"
+          component={Starred}
           options={{
             tabBarIcon: ({color, size}) => (
               <Icon name="ios-star" color={color} size={size} />
-            )
+            ),
           }}
         />
       </Tab.Navigator>
